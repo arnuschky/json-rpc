@@ -3,7 +3,7 @@ from . import six
 import json
 
 
-class JSONRPCError(Exception):
+class JSONRPCError(object):
 
     """ Error for JSON-RPC communication.
 
