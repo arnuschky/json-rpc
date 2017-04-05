@@ -109,12 +109,15 @@ class JSONRPC20Request(JSONRPCBaseRequest):
     @classmethod
     def from_json(cls, json_str):
         data = cls.deserialize(json_str)
+        return cls.from_dict(data)
 
+    @classmethod
+    def from_dict(cls, data):
         is_batch = isinstance(data, list)
         data = data if is_batch else [data]
 
         if not data:
-            raise JSONRPCInvalidRequestException("[] value is not accepted")
+            raise JSONRPCInvalidRequestException("Empty data is not accepted")
 
         if not all(isinstance(d, dict) for d in data):
             raise JSONRPCInvalidRequestException(
@@ -155,6 +158,10 @@ class JSONRPC20BatchRequest(object):
     @classmethod
     def from_json(cls, json_str):
         return JSONRPC20Request.from_json(json_str)
+    
+    @classmethod
+    def from_dict(cls, data):
+        return JSONRPC20Request.from_dict(data)
 
     @property
     def json(self):

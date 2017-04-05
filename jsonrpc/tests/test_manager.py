@@ -124,7 +124,6 @@ class TestJSONRPCResponseManager(unittest.TestCase):
         self.assertEqual(response.error["code"], -32000)
         self.assertEqual(response.error["data"], {
             "type": "KeyError",
-            "args": ('error_explanation',),
             "message": "'error_explanation'",
         })
 
@@ -157,7 +156,6 @@ class TestJSONRPCResponseManager(unittest.TestCase):
         self.assertEqual(response.error["code"], -32000)
         self.assertEqual(response.error["data"], {
             "type": "TypeError",
-            "args": ('TypeError inside method',),
             "message": 'TypeError inside method',
         })
 

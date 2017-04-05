@@ -18,7 +18,11 @@ class JSONRPCRequest(JSONSerializable):
     @classmethod
     def from_json(cls, json_str):
         data = cls.deserialize(json_str)
+        return cls.from_dict(data)
+
+    @classmethod
+    def from_dict(cls, data):
         if isinstance(data, dict) and "jsonrpc" not in data:
-            return JSONRPC10Request.from_json(json_str)
+            return JSONRPC10Request.from_dict(data)
         else:
-            return JSONRPC20Request.from_json(json_str)
+            return JSONRPC20Request.from_dict(data)
